@@ -13,8 +13,6 @@ import xml.etree.ElementTree as ET
 
 PREFIX = 'msa_'
 DISK_PROPERTIES_AS_LABEL_MAPPING = {'location': 'location',
-                                    'vendor': 'vendor',
-                                    'model': 'model',
                                     'serial-number': 'serial'}
 VOLUME_PROPERTIES_AS_LABEL_MAPPING = {'volume-name': 'name'}
 
@@ -25,15 +23,15 @@ METRICS = {
                          'property_name': 'temperature-numeric',
                          'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING},
     'disk_iops': {'description': 'IOPS',
-                  'path': 'disks',
-                  'object_selector': "./OBJECT[@name='drive']",
-                  'property_name': 'number-of-ios',
+                  'path': 'disk-statistics',
+                  'object_selector': "./OBJECT[@name='disk-statistics']",
+                  'property_name': 'iops',
                   'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING},
-    'disk_transfered': {'description': 'Data Transferred',
-                        'path': 'disks',
-                        'object_selector': "./OBJECT[@name='drive']",
-                        'property_name': 'total-data-transferred-numeric',
-                        'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING},
+    'disk_bps': {'description': 'Bytes per second',
+                 'path': 'disks',
+                 'object_selector': "./OBJECT[@name='disk-statistics']",
+                 'property_name': 'bytes-per-second-numeric',
+                 'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING},
     'disk_avg_resp_time': {'description': 'Average I/O Response Time',
                            'path': 'disks',
                            'object_selector': "./OBJECT[@name='drive']",
@@ -51,9 +49,19 @@ METRICS = {
                     'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING},
     'volume_health': {'description': 'Health',
                       'path': 'volumes',
-                      'object_selector': './OBJECT[@name="volume"]/PROPERTY[@name="volume-type"][text()="base"]/..',
+                      'object_selector': './OBJECT[@name="volume"]',
                       'property_name': 'health-numeric',
                       'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING},
+    'volume_iops': {'description': 'IOPS',
+                    'path': 'volume-statistics',
+                    'object_selector': './OBJECT[@name="volume-statistics"]',
+                    'property_name': 'iops',
+                    'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING},
+    'volume_bps': {'description': 'Bytes per second',
+                   'path': 'volume-statistics',
+                   'object_selector': './OBJECT[@name="volume-statistics"]',
+                   'property_name': 'bytes-per-second-numeric',
+                   'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING},
 }
 
 
