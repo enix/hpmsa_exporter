@@ -9,9 +9,11 @@ services:
 - docker:dind
 
 before_script:
+- export DOCKER_HOST="tcp://localhost:2375"
 - docker info
 
 build:
   stage: build
   script:
+  - export DOCKER_HOST="tcp://localhost:2375"
   - docker build -t msa-exporter .
