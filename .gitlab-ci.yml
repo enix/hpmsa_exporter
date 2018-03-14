@@ -14,4 +14,6 @@ before_script:
 build:
   stage: build
   script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN docker-registry.enix.org
   - docker build -t msa-exporter .
+  - docker push docker-registry.enix.org/docker/msa-exporter:latest
