@@ -16,6 +16,7 @@ DISK_PROPERTIES_AS_LABEL_MAPPING = {'location': 'location',
                                     'serial-number': 'serial'}
 VOLUME_PROPERTIES_AS_LABEL_MAPPING = {'volume-name': 'name'}
 CONTROLLER_PROPERTIES_AS_LABEL_MAPPING = {'durable-id': 'controller'}
+PSU_PROPERTIES_AS_LABEL_MAPPING = {'durable-id': 'psu', 'serial-number': 'serial'}
 
 METRICS = {
     'disk_temperature': {'description': 'Temperature',
@@ -103,6 +104,16 @@ METRICS = {
                                 'object_selector': './OBJECT[@name="controller-statistics"]',
                                 'property_name': 'write-cache-misses',
                                 'properties_as_label': CONTROLLER_PROPERTIES_AS_LABEL_MAPPING},
+    'psu_health': {'description': 'Power-supply unit health',
+                   'path': 'enclosure',
+                   'object_selector': './OBJECT[@name="enclosures"]/OBJECT[@name="power-supplies"]',
+                   'property_name': 'health-numeric',
+                   'properties_as_label': PSU_PROPERTIES_AS_LABEL_MAPPING},
+    'psu_status': {'description': 'Power-supply unit status',
+                   'path': 'enclosure',
+                   'object_selector': './OBJECT[@name="enclosures"]/OBJECT[@name="power-supplies"]',
+                   'property_name': 'status-numeric',
+                   'properties_as_label': PSU_PROPERTIES_AS_LABEL_MAPPING},
     'system_health': {'description': 'System health',
                       'path': 'system',
                       'object_selector': './OBJECT[@name="system-information"]',
