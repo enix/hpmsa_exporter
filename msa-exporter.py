@@ -147,7 +147,7 @@ def scrap_msa(host, login, password):
             if metric_type == 'gauge':
                 metric['_metric'] = prometheus_client.Gauge(PREFIX + name,
                                                             metric['description'],
-                                                            ['hostname'] + list(metric.get('properties_as_label', {}).values()))
+                                                            list(metric.get('properties_as_label', {}).values()))
             else:
                 continue  # Ignore bad metric types
 
@@ -156,9 +156,11 @@ def scrap_msa(host, login, password):
         for obj in xml.xpath(metric['object_selector']):
             labels = {metric['properties_as_label'][elem.get('name')]: elem.text for elem in obj
                       if elem.get('name') in metric.get('properties_as_label', {})}
-            labels['hostname'] = host
             value = obj.find("./PROPERTY[@name='%s']" % metric['property_name']).text
-            metric['_metric'].labels(**labels).set(float(value))
+            if labels:
+                metric['_metric'].labels(**labels).set(float(value))
+            else:
+                metric['_metric'].set(float(value))
 
 
 if __name__ == '__main__':
@@ -172,4 +174,4 @@ if __name__ == '__main__':
     prometheus_client.start_http_server(8000)
     while True:
         scrap_msa(args.hostname, args.login, args.password)
-        time.sleep(60)
+        time.sleep(30)
