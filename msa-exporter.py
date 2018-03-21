@@ -23,140 +23,140 @@ METRICS = {
         'description': 'Temperature',
         'path': 'disks',
         'object_selector': "./OBJECT[@name='drive']",
-        'property_name': 'temperature-numeric',
+        'property_selector': './PROPERTY[@name="temperature-numeric"]',
         'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING
     },
     'disk_iops': {
         'description': 'IOPS',
         'path': 'disk-statistics',
         'object_selector': "./OBJECT[@name='disk-statistics']",
-        'property_name': 'iops',
+        'property_selector': './PROPERTY[@name="iops"]',
         'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING
     },
     'disk_bps': {
         'description': 'Bytes per second',
         'path': 'disks',
         'object_selector': "./OBJECT[@name='disk-statistics']",
-        'property_name': 'bytes-per-second-numeric',
+        'property_selector': './PROPERTY[@name="bytes-per-second-numeric"]',
         'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING
     },
     'disk_avg_resp_time': {
         'description': 'Average I/O Response Time',
         'path': 'disks',
         'object_selector': "./OBJECT[@name='drive']",
-        'property_name': 'avg-rsp-time',
+        'property_selector': './PROPERTY[@name="avg-rsp-time"]',
         'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING
     },
     'disk_ssd_life_left': {
         'description': 'SSD Life Remaining',
         'path': 'disks',
         'object_selector': "./OBJECT[@name='drive']/PROPERTY[@name='architecture'][text()='SSD']/..",
-        'property_name': 'ssd-life-left-numeric',
+        'property_selector': './PROPERTY[@name="ssd-life-left-numeric"]',
         'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING
     },
     'disk_health': {
         'description': 'Health',
         'path': 'disks',
         'object_selector': "./OBJECT[@name='drive']",
-        'property_name': 'health-numeric',
+        'property_selector': './PROPERTY[@name="health-numeric"]',
         'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING
     },
     'volume_health': {
         'description': 'Health',
         'path': 'volumes',
         'object_selector': './OBJECT[@name="volume"]',
-        'property_name': 'health-numeric',
+        'property_selector': './PROPERTY[@name="health-numeric"]',
         'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
     },
     'volume_iops': {
         'description': 'IOPS',
         'path': 'volume-statistics',
         'object_selector': './OBJECT[@name="volume-statistics"]',
-        'property_name': 'iops',
+        'property_selector': './PROPERTY[@name="iops"]',
         'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
     },
     'volume_bps': {
         'description': 'Bytes per second',
         'path': 'volume-statistics',
         'object_selector': './OBJECT[@name="volume-statistics"]',
-        'property_name': 'bytes-per-second-numeric',
+        'property_selector': './PROPERTY[@name="bytes-per-second-numeric"]',
         'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
     },
     'enclosure_power': {
         'description': 'Power consumption in watts',
         'path': 'enclosures',
         'object_selector': './OBJECT[@name="enclosures"]',
-        'property_name': 'enclosure-power',
+        'property_selector': './PROPERTY[@name="enclosure-power"]',
         'properties_as_label': {'enclosure-id': 'id', 'enclosure-wwn': 'wwn'}
     },
     'controller_cpu': {
         'description': 'CPU Load',
         'path': 'controller-statistics',
         'object_selector': './OBJECT[@name="controller-statistics"]',
-        'property_name': 'cpu-load',
+        'property_selector': './PROPERTY[@name="cpu-load"]',
         'properties_as_label': CONTROLLER_PROPERTIES_AS_LABEL_MAPPING
     },
     'controller_iops': {
         'description': 'IOPS',
         'path': 'controller-statistics',
         'object_selector': './OBJECT[@name="controller-statistics"]',
-        'property_name': 'iops',
+        'property_selector': './PROPERTY[@name="iops"]',
         'properties_as_label': CONTROLLER_PROPERTIES_AS_LABEL_MAPPING
     },
     'controller_bps': {
         'description': 'Bytes per second',
         'path': 'controller-statistics',
         'object_selector': './OBJECT[@name="controller-statistics"]',
-        'property_name': 'bytes-per-second-numeric',
+        'property_selector': './PROPERTY[@name="bytes-per-second-numeric"]',
         'properties_as_label': CONTROLLER_PROPERTIES_AS_LABEL_MAPPING
     },
     'controller_read_hits': {
         'description': 'Read-Cache Hits',
         'path': 'controller-statistics',
         'object_selector': './OBJECT[@name="controller-statistics"]',
-        'property_name': 'read-cache-hits',
+        'property_selector': './PROPERTY[@name="read-cache-hits"]',
         'properties_as_label': CONTROLLER_PROPERTIES_AS_LABEL_MAPPING
     },
     'controller_read_misses': {
         'description': 'Read-Cache Misses',
         'path': 'controller-statistics',
         'object_selector': './OBJECT[@name="controller-statistics"]',
-        'property_name': 'read-cache-misses',
+        'property_selector': './PROPERTY[@name="read-cache-misses"]',
         'properties_as_label': CONTROLLER_PROPERTIES_AS_LABEL_MAPPING
     },
     'controller_write_hits': {
         'description': 'Write-Cache Hits',
         'path': 'controller-statistics',
         'object_selector': './OBJECT[@name="controller-statistics"]',
-        'property_name': 'write-cache-hits',
+        'property_selector': './PROPERTY[@name="write-cache-hits"]',
         'properties_as_label': CONTROLLER_PROPERTIES_AS_LABEL_MAPPING
     },
     'controller_write_misses': {
         'description': 'Write-Cache Misses',
         'path': 'controller-statistics',
         'object_selector': './OBJECT[@name="controller-statistics"]',
-        'property_name': 'write-cache-misses',
+        'property_selector': './PROPERTY[@name="write-cache-misses"]',
         'properties_as_label': CONTROLLER_PROPERTIES_AS_LABEL_MAPPING
     },
     'psu_health': {
         'description': 'Power-supply unit health',
         'path': 'enclosure',
         'object_selector': './OBJECT[@name="enclosures"]/OBJECT[@name="power-supplies"]',
-        'property_name': 'health-numeric',
+        'property_selector': './PROPERTY[@name="health-numeric"]',
         'properties_as_label': PSU_PROPERTIES_AS_LABEL_MAPPING
     },
     'psu_status': {
         'description': 'Power-supply unit status',
         'path': 'enclosure',
         'object_selector': './OBJECT[@name="enclosures"]/OBJECT[@name="power-supplies"]',
-        'property_name': 'status-numeric',
+        'property_selector': './PROPERTY[@name="status-numeric"]',
         'properties_as_label': PSU_PROPERTIES_AS_LABEL_MAPPING
     },
     'system_health': {
         'description': 'System health',
         'path': 'system',
         'object_selector': './OBJECT[@name="system-information"]',
-        'property_name': 'health-numeric'
+        'property_selector': './PROPERTY[@name="health-numeric"]'
     },
 }
 
@@ -196,7 +196,7 @@ def scrap_msa(host, login, password):
         for obj in xml.xpath(metric['object_selector']):
             labels = {metric['properties_as_label'][elem.get('name')]: elem.text for elem in obj
                       if elem.get('name') in metric.get('properties_as_label', {})}
-            value = obj.find("./PROPERTY[@name='%s']" % metric['property_name']).text
+            value = obj.find(metric['property_selector']).text
             if labels:
                 metric['_metric'].labels(**labels).set(float(value))
             else:
