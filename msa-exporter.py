@@ -340,6 +340,39 @@ METRICS = {
             'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
         }
     },
+    'volume_tier_distribution': {
+        'description': 'Volume tier distribution',
+        'sources': [
+            {
+                'path': 'volume-statistics',
+                'object_selector': './OBJECT[@name="volume-statistics"]',
+                'property_selector': './PROPERTY[@name="percent-tier-ssd"]',
+                'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING,
+                'labels': {'tier': 'Performance'}
+            },
+            {
+                'path': 'volume-statistics',
+                'object_selector': './OBJECT[@name="volume-statistics"]',
+                'property_selector': './PROPERTY[@name="percent-tier-sas"]',
+                'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING,
+                'labels': {'tier': 'Standard'}
+            },
+            {
+                'path': 'volume-statistics',
+                'object_selector': './OBJECT[@name="volume-statistics"]',
+                'property_selector': './PROPERTY[@name="percent-tier-sata"]',
+                'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING,
+                'labels': {'tier': 'Archive'}
+            },
+            {
+                'path': 'volume-statistics',
+                'object_selector': './OBJECT[@name="volume-statistics"]',
+                'property_selector': './PROPERTY[@name="percent-allocated-rfc"]',
+                'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING,
+                'labels': {'tier': 'RFC'}
+            },
+        ]
+    },
     'pool_data_read': {
         'description': 'Data Read',
         'sources': {
