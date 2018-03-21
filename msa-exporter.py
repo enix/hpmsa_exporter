@@ -491,7 +491,7 @@ METRICS = {
         'description': 'System health',
         'path': 'system',
         'object_selector': './OBJECT[@name="system-information"]',
-        'property_selector': './PROPERTY[@name="health-numeric"]'
+        'property_selector': './PROPERTY[@name="health-numeric"]',
     },
 }
 
@@ -522,7 +522,7 @@ def scrap_msa(host, login, password):
             if metric_type == 'gauge':
                 metric['_metric'] = prometheus_client.Gauge(PREFIX + name,
                                                             metric['description'],
-                                                            list(metric.get('properties_as_label', {}).values()))
+                                                            list(metric.get('labels', [])) + list(metric.get('properties_as_label', {}).values()))
             else:
                 continue  # Ignore bad metric types
 
@@ -531,6 +531,7 @@ def scrap_msa(host, login, password):
         for obj in xml.xpath(metric['object_selector']):
             labels = {metric['properties_as_label'][elem.get('name')]: elem.text for elem in obj
                       if elem.get('name') in metric.get('properties_as_label', {})}
+            labels.update(metric.get('labels', {}))
             value = obj.find(metric['property_selector']).text
             if labels:
                 metric['_metric'].labels(**labels).set(float(value))
