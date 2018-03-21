@@ -26,60 +26,60 @@ PSU_PROPERTIES_AS_LABEL_MAPPING = {'durable-id': 'psu', 'serial-number': 'serial
 
 METRICS = {
     'hostport_data_read': {
-            'description': 'Data Read',
-            'path': 'host-port-statistics',
-            'object_selector': './OBJECT[@name="host-port-statistics"]',
-            'property_selector': './PROPERTY[@name="data-read-numeric"]',
-            'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
+        'description': 'Data Read',
+        'path': 'host-port-statistics',
+        'object_selector': './OBJECT[@name="host-port-statistics"]',
+        'property_selector': './PROPERTY[@name="data-read-numeric"]',
+        'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
     },
     'hostport_data_written': {
-            'description': 'Data Written',
-            'path': 'host-port-statistics',
-            'object_selector': './OBJECT[@name="host-port-statistics"]',
-            'property_selector': './PROPERTY[@name="data-written-numeric"]',
-            'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
+        'description': 'Data Written',
+        'path': 'host-port-statistics',
+        'object_selector': './OBJECT[@name="host-port-statistics"]',
+        'property_selector': './PROPERTY[@name="data-written-numeric"]',
+        'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
     },
     'hostport_avg_resp_time_read': {
-            'description': 'Read Response Time',
-            'path': 'host-port-statistics',
-            'object_selector': './OBJECT[@name="host-port-statistics"]',
-            'property_selector': './PROPERTY[@name="avg-read-rsp-time"]',
-            'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
+        'description': 'Read Response Time',
+        'path': 'host-port-statistics',
+        'object_selector': './OBJECT[@name="host-port-statistics"]',
+        'property_selector': './PROPERTY[@name="avg-read-rsp-time"]',
+        'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
     },
     'hostport_avg_resp_time_write': {
-            'description': 'Write Response Time',
-            'path': 'host-port-statistics',
-            'object_selector': './OBJECT[@name="host-port-statistics"]',
-            'property_selector': './PROPERTY[@name="avg-write-rsp-time"]',
-            'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
+        'description': 'Write Response Time',
+        'path': 'host-port-statistics',
+        'object_selector': './OBJECT[@name="host-port-statistics"]',
+        'property_selector': './PROPERTY[@name="avg-write-rsp-time"]',
+        'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
     },
     'hostport_avg_resp_time': {
-            'description': 'I/O Response Time',
-            'path': 'host-port-statistics',
-            'object_selector': './OBJECT[@name="host-port-statistics"]',
-            'property_selector': './PROPERTY[@name="avg-rsp-time"]',
-            'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
+        'description': 'I/O Response Time',
+        'path': 'host-port-statistics',
+        'object_selector': './OBJECT[@name="host-port-statistics"]',
+        'property_selector': './PROPERTY[@name="avg-rsp-time"]',
+        'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
     },
     'hostport_queue_depth': {
-            'description': 'Queue Depth',
-            'path': 'host-port-statistics',
-            'object_selector': './OBJECT[@name="host-port-statistics"]',
-            'property_selector': './PROPERTY[@name="queue-depth"]',
-            'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
+        'description': 'Queue Depth',
+        'path': 'host-port-statistics',
+        'object_selector': './OBJECT[@name="host-port-statistics"]',
+        'property_selector': './PROPERTY[@name="queue-depth"]',
+        'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
     },
     'hostport_reads': {
-            'description': 'Reads',
-            'path': 'host-port-statistics',
-            'object_selector': './OBJECT[@name="host-port-statistics"]',
-            'property_selector': './PROPERTY[@name="number-of-reads"]',
-            'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
+        'description': 'Reads',
+        'path': 'host-port-statistics',
+        'object_selector': './OBJECT[@name="host-port-statistics"]',
+        'property_selector': './PROPERTY[@name="number-of-reads"]',
+        'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
     },
     'hostport_writes': {
-            'description': 'Writes',
-            'path': 'host-port-statistics',
-            'object_selector': './OBJECT[@name="host-port-statistics"]',
-            'property_selector': './PROPERTY[@name="number-of-writes"]',
-            'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
+        'description': 'Writes',
+        'path': 'host-port-statistics',
+        'object_selector': './OBJECT[@name="host-port-statistics"]',
+        'property_selector': './PROPERTY[@name="number-of-writes"]',
+        'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
     },
     'disk_temperature': {
         'description': 'Temperature',
