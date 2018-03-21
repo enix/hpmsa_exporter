@@ -11,14 +11,76 @@ import lxml.etree
 
 import xml.etree.ElementTree as ET
 
+
 PREFIX = 'msa_'
+HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING = {'durable-id': 'port'}
 DISK_PROPERTIES_AS_LABEL_MAPPING = {'location': 'location',
                                     'serial-number': 'serial'}
 VOLUME_PROPERTIES_AS_LABEL_MAPPING = {'volume-name': 'name'}
+POOLSTATS_PROPERTIES_AS_LABEL_MAPPING = {'pool': 'pool', 'serial-number': 'serial'}
+POOL_PROPERTIES_AS_LABEL_MAPPING = {'name': 'pool', 'serial-number': 'serial'}
+TIER_PROPERTIES_AS_LABEL_MAPPING = {'tier': 'tier', 'pool': 'pool', 'serial-number': 'serial'}
 CONTROLLER_PROPERTIES_AS_LABEL_MAPPING = {'durable-id': 'controller'}
 PSU_PROPERTIES_AS_LABEL_MAPPING = {'durable-id': 'psu', 'serial-number': 'serial'}
 
+
 METRICS = {
+    'hostport_data_read': {
+            'description': 'Data Read',
+            'path': 'host-port-statistics',
+            'object_selector': './OBJECT[@name="host-port-statistics"]',
+            'property_selector': './PROPERTY[@name="data-read-numeric"]',
+            'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'hostport_data_written': {
+            'description': 'Data Written',
+            'path': 'host-port-statistics',
+            'object_selector': './OBJECT[@name="host-port-statistics"]',
+            'property_selector': './PROPERTY[@name="data-written-numeric"]',
+            'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'hostport_avg_resp_time_read': {
+            'description': 'Read Response Time',
+            'path': 'host-port-statistics',
+            'object_selector': './OBJECT[@name="host-port-statistics"]',
+            'property_selector': './PROPERTY[@name="avg-read-rsp-time"]',
+            'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'hostport_avg_resp_time_write': {
+            'description': 'Write Response Time',
+            'path': 'host-port-statistics',
+            'object_selector': './OBJECT[@name="host-port-statistics"]',
+            'property_selector': './PROPERTY[@name="avg-write-rsp-time"]',
+            'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'hostport_avg_resp_time': {
+            'description': 'I/O Response Time',
+            'path': 'host-port-statistics',
+            'object_selector': './OBJECT[@name="host-port-statistics"]',
+            'property_selector': './PROPERTY[@name="avg-rsp-time"]',
+            'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'hostport_queue_depth': {
+            'description': 'Queue Depth',
+            'path': 'host-port-statistics',
+            'object_selector': './OBJECT[@name="host-port-statistics"]',
+            'property_selector': './PROPERTY[@name="queue-depth"]',
+            'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'hostport_reads': {
+            'description': 'Reads',
+            'path': 'host-port-statistics',
+            'object_selector': './OBJECT[@name="host-port-statistics"]',
+            'property_selector': './PROPERTY[@name="number-of-reads"]',
+            'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'hostport_writes': {
+            'description': 'Writes',
+            'path': 'host-port-statistics',
+            'object_selector': './OBJECT[@name="host-port-statistics"]',
+            'property_selector': './PROPERTY[@name="number-of-writes"]',
+            'properties_as_label': HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING
+    },
     'disk_temperature': {
         'description': 'Temperature',
         'path': 'disks',
@@ -81,6 +143,279 @@ METRICS = {
         'object_selector': './OBJECT[@name="volume-statistics"]',
         'property_selector': './PROPERTY[@name="bytes-per-second-numeric"]',
         'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'volume_reads': {
+        'description': 'Reads',
+        'path': 'volume-statistics',
+        'object_selector': './OBJECT[@name="volume-statistics"]',
+        'property_selector': './PROPERTY[@name="number-of-reads"]',
+        'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'volume_writes': {
+        'description': 'Writes',
+        'path': 'volume-statistics',
+        'object_selector': './OBJECT[@name="volume-statistics"]',
+        'property_selector': './PROPERTY[@name="number-of-writes"]',
+        'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'volume_data_read': {
+        'description': 'Data Read',
+        'path': 'volume-statistics',
+        'object_selector': './OBJECT[@name="volume-statistics"]',
+        'property_selector': './PROPERTY[@name="data-read-numeric"]',
+        'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'volume_data_written': {
+        'description': 'Data Written',
+        'path': 'volume-statistics',
+        'object_selector': './OBJECT[@name="volume-statistics"]',
+        'property_selector': './PROPERTY[@name="data-written-numeric"]',
+        'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'volume_shared_pages': {
+        'description': 'Shared Pages',
+        'path': 'volume-statistics',
+        'object_selector': './OBJECT[@name="volume-statistics"]',
+        'property_selector': './PROPERTY[@name="shared-pages"]',
+        'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'volume_read_hits': {
+        'description': 'Read-Cache Hits',
+        'path': 'volume-statistics',
+        'object_selector': './OBJECT[@name="volume-statistics"]',
+        'property_selector': './PROPERTY[@name="read-cache-hits"]',
+        'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'volume_read_misses': {
+        'description': 'Read-Cache Misses',
+        'path': 'volume-statistics',
+        'object_selector': './OBJECT[@name="volume-statistics"]',
+        'property_selector': './PROPERTY[@name="read-cache-misses"]',
+        'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'volume_write_hits': {
+        'description': 'Read-Cache Hits',
+        'path': 'volume-statistics',
+        'object_selector': './OBJECT[@name="volume-statistics"]',
+        'property_selector': './PROPERTY[@name="write-cache-hits"]',
+        'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'volume_write_misses': {
+        'description': 'Read-Cache Misses',
+        'path': 'volume-statistics',
+        'object_selector': './OBJECT[@name="volume-statistics"]',
+        'property_selector': './PROPERTY[@name="write-cache-misses"]',
+        'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'volume_small_destage': {
+        'description': 'Small Destages',
+        'path': 'volume-statistics',
+        'object_selector': './OBJECT[@name="volume-statistics"]',
+        'property_selector': './PROPERTY[@name="small-destages"]',
+        'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'volume_full_stripe_write_destages': {
+        'description': 'Full Stripe Write Destages',
+        'path': 'volume-statistics',
+        'object_selector': './OBJECT[@name="volume-statistics"]',
+        'property_selector': './PROPERTY[@name="full-stripe-write-destages"]',
+        'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'volume_read_ahead_ops': {
+        'description': 'Read-Ahead Operations',
+        'path': 'volume-statistics',
+        'object_selector': './OBJECT[@name="volume-statistics"]',
+        'property_selector': './PROPERTY[@name="read-ahead-operations"]',
+        'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'volume_write_cache_space': {
+        'description': 'Write Cache Space',
+        'path': 'volume-statistics',
+        'object_selector': './OBJECT[@name="volume-statistics"]',
+        'property_selector': './PROPERTY[@name="write-cache-space"]',
+        'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'volume_write_cache_percent': {
+        'description': 'Write Cache Percentage',
+        'path': 'volume-statistics',
+        'object_selector': './OBJECT[@name="volume-statistics"]',
+        'property_selector': './PROPERTY[@name="write-cache-percent"]',
+        'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'volume_size': {
+        'description': 'Size',
+        'path': 'volumes',
+        'object_selector': './OBJECT[@name="volume"]',
+        'property_selector': './PROPERTY[@name="size-numeric"]',
+        'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'volume_total_size': {
+        'description': 'Total Size',
+        'path': 'volumes',
+        'object_selector': './OBJECT[@name="volume"]',
+        'property_selector': './PROPERTY[@name="total-size-numeric"]',
+        'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'volume_allocated_size': {
+        'description': 'Total Size',
+        'path': 'volumes',
+        'object_selector': './OBJECT[@name="volume"]',
+        'property_selector': './PROPERTY[@name="allocated-size-numeric"]',
+        'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'volume_blocks': {
+        'description': 'Blocks',
+        'path': 'volumes',
+        'object_selector': './OBJECT[@name="volume"]',
+        'property_selector': './PROPERTY[@name="blocks"]',
+        'properties_as_label': VOLUME_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'pool_data_read': {
+        'description': 'Data Read',
+        'path': 'pool-statistics',
+        'object_selector': './OBJECT[@name="pool-statistics"]',
+        'property_selector': './/PROPERTY[@name="data-read-numeric"]',
+        'properties_as_label': POOLSTATS_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'pool_data_written': {
+        'description': 'Data Written',
+        'path': 'pool-statistics',
+        'object_selector': './OBJECT[@name="pool-statistics"]',
+        'property_selector': './/PROPERTY[@name="data-written-numeric"]',
+        'properties_as_label': POOLSTATS_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'pool_avg_resp_time': {
+        'description': 'I/O Response Time',
+        'path': 'pool-statistics',
+        'object_selector': './OBJECT[@name="pool-statistics"]',
+        'property_selector': './/PROPERTY[@name="avg-rsp-time"]',
+        'properties_as_label': POOLSTATS_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'pool_avg_resp_time_read': {
+        'description': 'Read Response Time',
+        'path': 'pool-statistics',
+        'object_selector': './OBJECT[@name="pool-statistics"]',
+        'property_selector': './/PROPERTY[@name="avg-read-rsp-time"]',
+        'properties_as_label': POOLSTATS_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'pool_total_size': {
+        'description': 'Total Size',
+        'path': 'pools',
+        'object_selector': './OBJECT[@name="pools"]',
+        'property_selector': './PROPERTY[@name="total-size-numeric"]',
+        'properties_as_label': POOL_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'pool_available_size': {
+        'description': 'Available Size',
+        'path': 'pools',
+        'object_selector': './OBJECT[@name="pools"]',
+        'property_selector': './PROPERTY[@name="total-avail-numeric"]',
+        'properties_as_label': POOL_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'pool_snapshot_size': {
+        'description': 'Snapshot Size',
+        'path': 'pools',
+        'object_selector': './OBJECT[@name="pools"]',
+        'property_selector': './PROPERTY[@name="snap-size-numeric"]',
+        'properties_as_label': POOL_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'pool_allocated_pages': {
+        'description': 'Allocated Pages',
+        'path': 'pools',
+        'object_selector': './OBJECT[@name="pools"]',
+        'property_selector': './PROPERTY[@name="allocated-pages"]',
+        'properties_as_label': POOL_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'pool_available_pages': {
+        'description': 'Available Pages',
+        'path': 'pools',
+        'object_selector': './OBJECT[@name="pools"]',
+        'property_selector': './PROPERTY[@name="available-pages"]',
+        'properties_as_label': POOL_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'pool_metadata_volume_size': {
+        'description': 'Metadata Volume Size',
+        'path': 'pools',
+        'object_selector': './OBJECT[@name="pools"]',
+        'property_selector': './PROPERTY[@name="metadata-vol-size-numeric"]',
+        'properties_as_label': POOL_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'pool_total_rfc_size': {
+        'description': 'Total RFC Size',
+        'path': 'pools',
+        'object_selector': './OBJECT[@name="pools"]',
+        'property_selector': './PROPERTY[@name="total-rfc-size-numeric"]',
+        'properties_as_label': POOL_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'pool_available_rfc_size': {
+        'description': 'Available RFC Size',
+        'path': 'pools',
+        'object_selector': './OBJECT[@name="pools"]',
+        'property_selector': './PROPERTY[@name="available-rfc-size-numeric"]',
+        'properties_as_label': POOL_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'pool_reserved_size': {
+        'description': 'Reserved Size',
+        'path': 'pools',
+        'object_selector': './OBJECT[@name="pools"]',
+        'property_selector': './PROPERTY[@name="reserved-size-numeric"]',
+        'properties_as_label': POOL_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'pool_unallocated_reserved_size': {
+        'description': 'Unallocated Reserved Size',
+        'path': 'pools',
+        'object_selector': './OBJECT[@name="pools"]',
+        'property_selector': './PROPERTY[@name="reserved-unalloc-size-numeric"]',
+        'properties_as_label': POOL_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'tier_reads': {
+        'description': 'Reads',
+        'path': 'pool-statistics',
+        'object_selector': './/OBJECT[@name="tier-statistics"]',
+        'property_selector': './/PROPERTY[@name="number-of-reads"]',
+        'properties_as_label': TIER_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'tier_writes': {
+        'description': 'Writes',
+        'path': 'pool-statistics',
+        'object_selector': './/OBJECT[@name="tier-statistics"]',
+        'property_selector': './/PROPERTY[@name="number-of-writes"]',
+        'properties_as_label': TIER_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'tier_data_read': {
+        'description': 'Data Read',
+        'path': 'pool-statistics',
+        'object_selector': './/OBJECT[@name="tier-statistics"]',
+        'property_selector': './/PROPERTY[@name="data-read-numeric"]',
+        'properties_as_label': TIER_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'tier_data_written': {
+        'description': 'Data Written',
+        'path': 'pool-statistics',
+        'object_selector': './/OBJECT[@name="tier-statistics"]',
+        'property_selector': './/PROPERTY[@name="data-written-numeric"]',
+        'properties_as_label': TIER_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'tier_avg_resp_time': {
+        'description': 'I/O Response Time',
+        'path': 'pool-statistics',
+        'object_selector': './/OBJECT[@name="tier-statistics"]',
+        'property_selector': './/PROPERTY[@name="avg-rsp-time"]',
+        'properties_as_label': TIER_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'tier_avg_resp_time_read': {
+        'description': 'Read Response Time',
+        'path': 'pool-statistics',
+        'object_selector': './/OBJECT[@name="tier-statistics"]',
+        'property_selector': './/PROPERTY[@name="avg-read-rsp-time"]',
+        'properties_as_label': TIER_PROPERTIES_AS_LABEL_MAPPING
+    },
+    'tier_avg_resp_time_write': {
+        'description': 'Write Response Time',
+        'path': 'pool-statistics',
+        'object_selector': './/OBJECT[@name="tier-statistics"]',
+        'property_selector': './/PROPERTY[@name="avg-write-rsp-time"]',
+        'properties_as_label': TIER_PROPERTIES_AS_LABEL_MAPPING
     },
     'enclosure_power': {
         'description': 'Power consumption in watts',
