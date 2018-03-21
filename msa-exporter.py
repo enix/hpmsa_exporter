@@ -16,7 +16,7 @@ PREFIX = 'msa_'
 HOSTPORTSTATS_PROPERTIES_AS_LABEL_MAPPING = {'durable-id': 'port'}
 DISK_PROPERTIES_AS_LABEL_MAPPING = {'location': 'location',
                                     'serial-number': 'serial'}
-VOLUME_PROPERTIES_AS_LABEL_MAPPING = {'volume-name': 'name'}
+VOLUME_PROPERTIES_AS_LABEL_MAPPING = {'volume-name': 'volume'}
 POOLSTATS_PROPERTIES_AS_LABEL_MAPPING = {'pool': 'pool', 'serial-number': 'serial'}
 POOL_PROPERTIES_AS_LABEL_MAPPING = {'name': 'pool', 'serial-number': 'serial'}
 TIER_PROPERTIES_AS_LABEL_MAPPING = {'tier': 'tier', 'pool': 'pool', 'serial-number': 'serial'}
