@@ -151,6 +151,123 @@ METRICS = {
             'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING
         }
     },
+    'disk_errors': {
+        'description': 'Errors',
+        'sources': [
+            {
+                'path': 'disk-statistics',
+                'object_selector': "./OBJECT[@name='disk-statistics']",
+                'property_selector': './PROPERTY[@name="smart-count-1"]',
+                'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING,
+                'labels': {'type': 'smart', 'port': 1}
+            },
+            {
+                'path': 'disk-statistics',
+                'object_selector': "./OBJECT[@name='disk-statistics']",
+                'property_selector': './PROPERTY[@name="smart-count-2"]',
+                'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING,
+                'labels': {'type': 'smart', 'port': 2}
+            },
+            {
+                'path': 'disk-statistics',
+                'object_selector': "./OBJECT[@name='disk-statistics']",
+                'property_selector': './PROPERTY[@name="io-timeout-count-1"]',
+                'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING,
+                'labels': {'type': 'io-timeout', 'port': 1}
+            },
+            {
+                'path': 'disk-statistics',
+                'object_selector': "./OBJECT[@name='disk-statistics']",
+                'property_selector': './PROPERTY[@name="io-timeout-count-2"]',
+                'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING,
+                'labels': {'type': 'io-timeout', 'port': 2}
+            },
+            {
+                'path': 'disk-statistics',
+                'object_selector': "./OBJECT[@name='disk-statistics']",
+                'property_selector': './PROPERTY[@name="no-response-count-1"]',
+                'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING,
+                'labels': {'type': 'no-response', 'port': 1}
+            },
+            {
+                'path': 'disk-statistics',
+                'object_selector': "./OBJECT[@name='disk-statistics']",
+                'property_selector': './PROPERTY[@name="no-response-count-2"]',
+                'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING,
+                'labels': {'type': 'no-response', 'port': 2}
+            },
+            {
+                'path': 'disk-statistics',
+                'object_selector': "./OBJECT[@name='disk-statistics']",
+                'property_selector': './PROPERTY[@name="spinup-retry-count-1"]',
+                'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING,
+                'labels': {'type': 'spinup-retry', 'port': 1}
+            },
+            {
+                'path': 'disk-statistics',
+                'object_selector': "./OBJECT[@name='disk-statistics']",
+                'property_selector': './PROPERTY[@name="spinup-retry-count-2"]',
+                'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING,
+                'labels': {'type': 'spinup-retry', 'port': 2}
+            },
+            {
+                'path': 'disk-statistics',
+                'object_selector': "./OBJECT[@name='disk-statistics']",
+                'property_selector': './PROPERTY[@name="number-of-media-errors-1"]',
+                'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING,
+                'labels': {'type': 'media-errors', 'port': 1}
+            },
+            {
+                'path': 'disk-statistics',
+                'object_selector': "./OBJECT[@name='disk-statistics']",
+                'property_selector': './PROPERTY[@name="number-of-media-errors-2"]',
+                'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING,
+                'labels': {'type': 'media-errors', 'port': 2}
+            },
+            {
+                'path': 'disk-statistics',
+                'object_selector': "./OBJECT[@name='disk-statistics']",
+                'property_selector': './PROPERTY[@name="number-of-nonmedia-errors-1"]',
+                'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING,
+                'labels': {'type': 'nonmedia-errors', 'port': 1}
+            },
+            {
+                'path': 'disk-statistics',
+                'object_selector': "./OBJECT[@name='disk-statistics']",
+                'property_selector': './PROPERTY[@name="number-of-nonmedia-errors-2"]',
+                'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING,
+                'labels': {'type': 'nonmedia-errors', 'port': 2}
+            },
+            {
+                'path': 'disk-statistics',
+                'object_selector': "./OBJECT[@name='disk-statistics']",
+                'property_selector': './PROPERTY[@name="number-of-block-reassigns-1"]',
+                'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING,
+                'labels': {'type': 'block-reassigns', 'port': 1}
+            },
+            {
+                'path': 'disk-statistics',
+                'object_selector': "./OBJECT[@name='disk-statistics']",
+                'property_selector': './PROPERTY[@name="number-of-block-reassigns-2"]',
+                'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING,
+                'labels': {'type': 'block-reassigns', 'port': 2}
+            },
+            {
+                'path': 'disk-statistics',
+                'object_selector': "./OBJECT[@name='disk-statistics']",
+                'property_selector': './PROPERTY[@name="number-of-bad-blocks-1"]',
+                'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING,
+                'labels': {'type': 'bad-blocks', 'port': 1}
+            },
+            {
+                'path': 'disk-statistics',
+                'object_selector': "./OBJECT[@name='disk-statistics']",
+                'property_selector': './PROPERTY[@name="number-of-bad-blocks-2"]',
+                'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING,
+                'labels': {'type': 'bad-blocks', 'port': 2}
+            }
+        ]
+    },
     'volume_health': {
         'description': 'Health',
         'sources': {
