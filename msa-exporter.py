@@ -844,11 +844,13 @@ if __name__ == '__main__':
     parser.add_argument('hostname')
     parser.add_argument('login')
     parser.add_argument('password')
+    parser.add_argument('-p', '--port', type=int, default=8000)
+    parser.add_argument('-i', '--interval', type=int, default=60)
 
     args = parser.parse_args()
 
-    prometheus_client.start_http_server(8000)
+    prometheus_client.start_http_server(args.port)
     metrics_store = MetricStore()
     while True:
         scrap_msa(metrics_store, args.hostname, args.login, args.password)
-        time.sleep(30)
+        time.sleep(args.interval)
