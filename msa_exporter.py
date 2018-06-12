@@ -3,6 +3,7 @@
 import hashlib
 import time
 import argparse
+import traceback
 
 import requests
 import prometheus_client
@@ -852,5 +853,9 @@ if __name__ == '__main__':
     prometheus_client.start_http_server(args.port)
     metrics_store = MetricStore()
     while True:
-        scrap_msa(metrics_store, args.hostname, args.login, args.password)
+    while True:
+        try:
+            scrap_msa(metrics_store, args.hostname, args.login, args.password)
+        except:
+            traceback.print_exc()
         time.sleep(args.interval)
