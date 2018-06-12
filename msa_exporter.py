@@ -853,7 +853,6 @@ if __name__ == '__main__':
     prometheus_client.start_http_server(args.port)
     metrics_store = MetricStore()
     while True:
-    while True:
         try:
             scrap_msa(metrics_store, args.hostname, args.login, args.password)
         except:
