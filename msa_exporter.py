@@ -802,12 +802,12 @@ class MetricStore(object):
             return metric
 
 
-def scrap_msa(metrics_store, host, login, password):
+def scrap_msa(metrics_store, host, login, password, timeout=10):
     session = requests.Session()
     session.verify = False
 
     creds = hashlib.md5(b'%s_%s' % (login.encode('utf8'), password.encode('utf8'))).hexdigest()
-    response = session.get('https://%s/api/login/%s' % (host, creds))
+    response = session.get('https://%s/api/login/%s' % (host, creds), timeout=timeout)
     response.raise_for_status()
     session_key = ET.fromstring(response.content)[0][2].text
 
@@ -847,6 +847,7 @@ if __name__ == '__main__':
     parser.add_argument('password')
     parser.add_argument('-p', '--port', type=int, default=8000)
     parser.add_argument('-i', '--interval', type=int, default=60)
+    parser.add_argument('-t', '--timeout', type=int, default=10)
 
     args = parser.parse_args()
 
@@ -854,7 +855,7 @@ if __name__ == '__main__':
     metrics_store = MetricStore()
     while True:
         try:
-            scrap_msa(metrics_store, args.hostname, args.login, args.password)
+            scrap_msa(metrics_store, args.hostname, args.login, args.password, timeout=args.timeout)
         except:
             traceback.print_exc()
         time.sleep(args.interval)
