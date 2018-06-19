@@ -847,7 +847,7 @@ if __name__ == '__main__':
     parser.add_argument('password')
     parser.add_argument('-p', '--port', type=int, default=8000)
     parser.add_argument('-i', '--interval', type=int, default=60)
-    parser.add_argument('-t', '--timeout', type=int, default=10)
+    parser.add_argument('-t', '--timeout', type=int, default=60)
 
     args = parser.parse_args()
 
