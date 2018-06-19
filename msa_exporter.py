@@ -826,7 +826,7 @@ def scrap_msa(metrics_store, host, login, password, timeout=10):
 
         for source in sources:
             if source['path'] not in path_cache:
-                response = session.get('https://%s/api/show/%s' % (host, source['path']))
+                response = session.get('https://%s/api/show/%s' % (host, source['path']), timeout=timeout)
                 response.raise_for_status()
                 path_cache[source['path']] = lxml.etree.fromstring(response.content)
 
