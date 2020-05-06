@@ -86,4 +86,9 @@ This exporter exposes the following metrics:
 
 This exporter has been tested on the following hardware:
 
- - MSA 2050 series using 3.5" and 2.5" backplanes with or without external JBODs
+ - HP MSA 2050/2052 series using 3.5" and 2.5" backplanes with or without external JBODs
+ - DELL ME4024 with 2.5" backplanes
+ 
+ It can probably work on :
+ - Dothill/Seagate AssuredSan product
+ - Lenovo DS S2200 / S3200
