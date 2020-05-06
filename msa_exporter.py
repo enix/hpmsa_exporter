@@ -850,6 +850,7 @@ def scrap_msa(metrics_store, host, login, password, timeout=10):
                           if elem.get('name') in source.get('properties_as_label', {})}
                 labels.update(source.get('labels', {}))
                 value = obj.find(source['property_selector']).text
+                if value == 'N/A' : value = 'nan'
                 metrics_store.get_or_create(metric.get('type', 'gauge'), name, metric['description'], labels).set(value)
 
 
