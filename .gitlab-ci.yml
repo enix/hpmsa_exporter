@@ -1,12 +1,4 @@
-image: docker:latest
-
-# When using dind, it's wise to use the overlayfs driver for
-# improved performance.
-variables:
-  DOCKER_DRIVER: overlay2
-
-services:
-- docker:dind
+image: docker:20.10
 
 before_script:
 - docker info
@@ -14,6 +6,6 @@ before_script:
 build:
   stage: build
   script:
-  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN docker-registry.enix.org
-  - docker build -t docker-registry.enix.org/docker/msa-exporter .
-  - docker push docker-registry.enix.org/docker/msa-exporter:latest
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN docker-registry.enix.io
+  - docker build -t docker-registry.enix.io/docker/msa-exporter .
+  - docker push docker-registry.enix.io/docker/msa-exporter:latest
