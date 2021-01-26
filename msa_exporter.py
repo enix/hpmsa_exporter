@@ -817,6 +817,18 @@ def scrap_msa(metrics_store, host, login, password, timeout=10):
 
     path_cache = {}
 
+# Firmware version
+    response = session.get('https://%s/api/show/version' % (host), timeout=timeout)
+    xml = lxml.etree.fromstring(response.content)
+
+    for controller in ['controller-a-versions', 'controller-b-versions' ]:
+        for obj in xml.xpath('./OBJECT[@name="%s"]'%controller):
+            labels = { "controller": controller }
+            for version in ["bundle-version", "bundle-base-version","sc-fw", "mc-fw", "pld-rev"]:
+                value = obj.find('./PROPERTY[@name="%s"]'%version).text
+                labels[version.replace("-", "_")] = value
+            metrics_store.get_or_create('gauge', "version", "Firmware Versions", labels).set(1)
+
     for name, metric in METRICS.items():
         name = PREFIX + name
         if isinstance(metric['sources'], dict):
