@@ -5,6 +5,7 @@ import time
 import argparse
 import traceback
 
+import urllib3
 import requests
 import prometheus_client
 import lxml.etree
@@ -863,6 +864,8 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
+    # disable urllib3 SSL warnings used by pyrequests
+    urllib3.disable_warnings()
     prometheus_client.start_http_server(args.port)
     metrics_store = MetricStore()
     while True:
