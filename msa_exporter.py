@@ -828,7 +828,7 @@ def scrap_msa(metrics_store, host, login, password, timeout=10):
             for version in ["bundle-version", "bundle-base-version","sc-fw", "mc-fw", "pld-rev"]:
                 value = obj.find('./PROPERTY[@name="%s"]'%version).text
                 labels[version.replace("-", "_")] = value
-            metrics_store.get_or_create('gauge', "version", "Firmware Versions", labels).set(1)
+            metrics_store.get_or_create('gauge', PREFIX + "version", "Firmware Versions", labels).set(1)
 
     for name, metric in METRICS.items():
         name = PREFIX + name
