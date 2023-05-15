@@ -865,6 +865,10 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
+    print("Starting MSA exporter on port %d" % args.port)
+    print("Connecting to %s as %s" % (args.hostname, args.login))
+    print("Scraping every %d seconds with timeout %d seconds" % (args.interval, args.timeout))
+
     # disable urllib3 SSL warnings used by pyrequests
     urllib3.disable_warnings()
     prometheus_client.start_http_server(args.port)
