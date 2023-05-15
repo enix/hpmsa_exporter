@@ -807,7 +807,7 @@ def scrap_msa(metrics_store, host, login, password, timeout=10):
     session = requests.Session()
     session.verify = False
 
-    creds = hashlib.md5(b'%s_%s' % (login.encode('utf8'), password.encode('utf8'))).hexdigest()
+    creds = hashlib.sha256(b'%s_%s' % (login.encode('utf8'), password.encode('utf8'))).hexdigest()
     response = session.get('https://%s/api/login/%s' % (host, creds), timeout=timeout)
     response.raise_for_status()
     session_key = ET.fromstring(response.content)[0][2].text
