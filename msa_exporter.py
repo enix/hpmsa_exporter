@@ -117,6 +117,15 @@ METRICS = {
             'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING
         }
     },
+    'disk_power_on_hours': {
+        'description': 'Power on hours',
+        'sources': {
+            'path': 'disk-statistics',
+            'object_selector': "./OBJECT[@name='disk-statistics']",
+            'property_selector': './PROPERTY[@name="power-on-hours"]',
+            'properties_as_label': DISK_PROPERTIES_AS_LABEL_MAPPING
+        }
+    },
     'disk_bps': {
         'description': 'Bytes per second',
         'sources': {
