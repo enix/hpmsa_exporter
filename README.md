@@ -26,6 +26,7 @@ This exporter exposes the following metrics:
 | msa_disk_avg_resp_time                | Average I/O Response Time  | location, serial             |
 | msa_disk_ssd_life_left                | SSD Life Remaining         | location, serial             |
 | msa_disk_health                       | Health                     | location, serial             |
+| msa_disk_power_on_hours               | Power on hours             | location, serial             |
 | msa_disk_errors                       | Errors                     | location, port, serial, type |
 | msa_volume_health                     | Health                     | volume                       |
 | msa_volume_iops                       | IOPS                       | volume                       |
